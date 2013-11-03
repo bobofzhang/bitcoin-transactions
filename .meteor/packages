@@ -9,3 +9,5 @@ insecure
 preserve-inputs
 less
 bootstrap-3
+d3
+random

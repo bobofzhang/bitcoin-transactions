@@ -4,6 +4,7 @@
 
 <body>
   {{> header}}
+  {{> container}}
 </body>
 
 <template name="header">
@@ -26,10 +27,24 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a>last: {{price}}</a>
+          <a>
+            <span>last transaction: {{lastTransaction}} BTC</span>
+            <span>last price: {{lastPrice}}</span>
+          </a>
         </li>
       </ul>
     </nav>
   </div>
 </header>
+</template>
+
+<template name="container">
+ {{> svg}}
+</template>
+
+<template name="svg">
+  <div>
+    <svg id="bubbles" width="100%" height="100%">
+    </svg>
+  </div>
 </template>

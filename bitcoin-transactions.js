@@ -1,20 +1,14 @@
 if (Meteor.isClient) {
   Deps.autorun(function () {
-    var websocket = new WebSocket('ws://websocket.mtgox.com');
-    websocket.onopen = function () {
-      websocket.send('{"op":"mtgox.subscribe","type":"ticker"}');    
-    };
-
-    websocket.onmessage = function (e) {
-      var derp = JSON.parse(e.data);
-      if (derp.ticker) {
-        Session.set("lastPrice", derp.ticker.last.display);
-      }
-    };
+    Socket.initialize();
   });
 
-  Template.header.price = function () {
+  Template.header.lastPrice = function () {
     return Session.get("lastPrice") || '$210.00';
+  };
+
+  Template.header.lastTransaction = function () {
+    return Session.get("lastTransaction") || '0';
   };
 
   Template.header.events({
