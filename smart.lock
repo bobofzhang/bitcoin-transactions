@@ -2,13 +2,19 @@
   "meteor": {},
   "dependencies": {
     "basePackages": {
-      "bootstrap-3": {}
+      "bootstrap-3": {},
+      "buzz.js": {}
     },
     "packages": {
       "bootstrap-3": {
         "git": "https://github.com/mangasocial/meteor-bootstrap-3.git",
         "tag": "v0.3.5",
         "commit": "47996f67f3987c9f82117394effcbe1586a4fe29"
+      },
+      "buzz.js": {
+        "git": "https://github.com/brentjanderson/meteor-buzz.git",
+        "tag": "v1.1.0.1",
+        "commit": "5c579c9833a6633a38fb05db928a09ac0a3bbc7e"
       }
     }
   }
