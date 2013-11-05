@@ -11,6 +11,14 @@ if (Meteor.isClient) {
     return Session.get("lastTransaction") || '0';
   };
 
+  Template.svg.combo = function () {
+    return Session.get("combo") || '0';
+  };
+
+  Template.svg.points = function () {
+    return Session.get("points") || '0';
+  };
+
   Template.header.events({
     'click input' : function () {
     }
