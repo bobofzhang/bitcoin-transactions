@@ -26,13 +26,13 @@ if (Meteor.isClient) {
       if (e.keyCode == 0 || e.keyCode == 32) { // space
         e.preventDefault();
 
-        var wav = '/sounds/explode' + _.sample([1, 2, 3]) + '.wav';
-        var s = new buzz.sound(wav);
-        s.play();
-
         _.each(_.reject(d3.selectAll('circle')[0], function(circle) { 
           return circle.style.opacity == 0 || circle.getAttribute('class') == 'removed'; 
         }), function(circle) { 
+          var wav = '/sounds/explode' + _.sample([1, 2, 3]) + '.wav';
+          var s = new buzz.sound(wav);
+          s.play();
+
           for (var k = 0; k < 50; k++) {
             var cx = parseInt($(circle).attr('cx'), 10);
             var cy = parseInt($(circle).attr('cy'), 10);
