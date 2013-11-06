@@ -26,11 +26,13 @@ if (Meteor.isClient) {
       if (e.keyCode == 0 || e.keyCode == 32) { // space
         e.preventDefault();
 
-        _.each(_.reject(d3.selectAll('circle')[0], function(circle) { return circle.style.opacity == 0; }), function(circle) { 
-          var wav = '/sounds/explode' + _.sample([1, 2, 3]) + '.wav';
-          var s = new buzz.sound(wav);
-          s.play();
+        var wav = '/sounds/explode' + _.sample([1, 2, 3]) + '.wav';
+        var s = new buzz.sound(wav);
+        s.play();
 
+        _.each(_.reject(d3.selectAll('circle')[0], function(circle) { 
+          return circle.style.opacity == 0 || circle.getAttribute('class') == 'removed'; 
+        }), function(circle) { 
           for (var k = 0; k < 50; k++) {
             var cx = parseInt($(circle).attr('cx'), 10);
             var cy = parseInt($(circle).attr('cy'), 10);
@@ -54,7 +56,7 @@ if (Meteor.isClient) {
               .style("fill-opacity",1e-6)
               .remove() 
 
-            d3.select(circle).transition().duration(250).style("opacity", 0).remove();
+            d3.select(circle).attr('class', 'removed').transition().duration(250).style("opacity", 0).remove();
           }
         });
       }
