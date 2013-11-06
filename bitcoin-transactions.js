@@ -28,15 +28,17 @@ if (Meteor.isClient) {
 
         _.each(_.reject(d3.selectAll('circle')[0], function(circle) { 
           return circle.style.opacity == 0 || circle.getAttribute('class') == 'removed'; 
-        }), function(circle) { 
+        }), function(circle) {
           var wav = '/sounds/explode' + _.sample([1, 2, 3]) + '.wav';
           var s = new buzz.sound(wav);
           s.play();
 
-          for (var k = 0; k < 50; k++) {
-            var cx = parseInt($(circle).attr('cx'), 10);
-            var cy = parseInt($(circle).attr('cy'), 10);
+          var particles = parseInt($(circle).attr('r'), 10);
 
+          var cx = parseInt($(circle).attr('cx'), 10);
+          var cy = parseInt($(circle).attr('cy'), 10);
+
+          for (var k = 0; k < particles; k++) {
             var randomX = (Math.floor(Random.fraction()*200)-100) + cx;
             var randomY = (Math.floor(Random.fraction()*200)-100) + cy;
 
@@ -58,6 +60,37 @@ if (Meteor.isClient) {
 
             d3.select(circle).attr('class', 'removed').transition().duration(250).style("opacity", 0).remove();
           }
+          
+          var bonus = particles * 1000 * Session.get("combo");
+          
+          d3.select("#bubbles").append('text')
+            .attr('x', cx - 25)
+            .attr('y', cy - 25)
+            .style('font-family', 'Impact')
+            .style('font-size', '18px')
+            .style('opacity', 0.8)
+            .attr("fill", "steelblue")
+            .text("+" + bonus)
+            .transition()
+            .duration(3000)
+            .attr('y', cy - 200)
+            .style("opacity", 0)
+            .remove();
+
+          var points = parseInt((Session.get("points") || 0) + bonus, 10);
+          Session.set("points", points);
+
+          d3.select('.points')
+            .text($('.points').text())
+            .transition()
+            .duration(3000)
+            .ease('linear')
+            .tween("text", function() {
+              var i = d3.interpolate(this.textContent, points);
+              return function(t) {
+                this.textContent = "points " + Math.round(i(t));
+              };
+            });
         });
       }
     });
