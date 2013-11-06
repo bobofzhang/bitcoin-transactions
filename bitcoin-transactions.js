@@ -27,7 +27,7 @@ if (Meteor.isClient) {
         e.preventDefault();
 
         _.each(_.reject(d3.selectAll('circle')[0], function(circle) { return circle.style.opacity == 0; }), function(circle) { 
-          var wav = '/sounds/explode' + _.shuffle([1, 2, 3])[0] + '.wav';
+          var wav = '/sounds/explode' + _.sample([1, 2, 3]) + '.wav';
           var s = new buzz.sound(wav);
           s.play();
 
