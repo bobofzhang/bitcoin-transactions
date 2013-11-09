@@ -6,7 +6,7 @@ if (Meteor.isClient) {
   });
 
   Template.header.lastPrice = function () {
-    return Session.get("lastPrice") || '$210.00';
+    return Session.get("lastPrice") || '$0';
   };
 
   Template.header.lastTransaction = function () {
