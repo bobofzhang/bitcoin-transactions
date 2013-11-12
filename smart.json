@@ -1,6 +1,7 @@
 {
   "packages": {
     "bootstrap-3": {},
-    "buzz.js": {}
+    "buzz.js": {},
+    "accounts-ui-bootstrap-3": {}
   }
 }
