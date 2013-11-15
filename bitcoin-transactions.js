@@ -22,8 +22,8 @@ if (Meteor.isClient) {
   };
 
   Template.svg.rendered = function() {
-    $('body').on('keydown', function(e) {
-      if (e.keyCode == 0 || e.keyCode == 32) { // space
+    $('body').on('keydown touchstart', function(e) {
+      if (e.touches || e.keyCode == 0 || e.keyCode == 32) {
         e.preventDefault();
 
         _.each(_.reject(d3.selectAll('circle')[0], function(circle) { 
